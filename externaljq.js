@@ -1,11 +1,17 @@
 $(document).ready(function(){
     
     $("#select-chord").click(function(){
-        $("#chords").slideToggle("slow");
+        $("#triad").slideToggle("slow");
     });
 
-    $(".chord-btn").click(function(){
+    $(".triad-btn").click(function(){
         $("#select-chord").text($(this).text());
+        $(this).parent().slideToggle("slow");
+        $("#seventh").slideToggle("slow");
+    })
+
+    $(".seventh-btn").click(function(){
+        $("#select-chord").text($("#select-chord").text() + " " + $(this).text())
         $(this).parent().slideToggle("slow");
         $("#extensions").slideToggle("slow");
     })

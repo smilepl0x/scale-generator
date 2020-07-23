@@ -5,7 +5,6 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Chord Generator</title>
-        <link rel="stylesheet" href="./style.css">
         <!-- Bootstrap / JQuery-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -13,48 +12,55 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
         <!--External JQ-->
         <script src="externaljq.js"></script>
+        <!-- Styles -->
+        <link rel="stylesheet" href="./style.css">
     </head>
     <body>
         <div class="container h-100">
             <div class="row h-100">
                 <div class="col my-auto">
-                    <div class="d-flex flex-column align-content-center">
-                        <div class="text-center">
-                            <div type="button" class="btn btn-secondary" id="select-chord">Please Select a Chord</div>
+                    <div class="d-flex flex-column align-items-center">
+                        <div class="w-100 text-center m-2">
+                            <div type="button" class="btn btn-secondary w-100" id="select-chord">Please Select a Chord</div>
                         </div>
-                        <div class="text-center m-2" id="chords">
-                            <div class="btn btn-secondary chord-btn">Maj7</div>
-                            <div class="btn btn-secondary chord-btn">7</div>
-                            <div class="btn btn-secondary chord-btn">m7</div>
-                            <div class="btn btn-secondary chord-btn">mMaj7</div>
-                            <div class="btn btn-secondary chord-btn">&deg;7</div>
-                            <div class="btn btn-secondary chord-btn">6</div>
-                            <div class="btn btn-secondary chord-btn">m6</div>
-                            <div class="btn btn-secondary chord-btn">6/9</div>
-                            <div class="btn btn-secondary chord-btn">Major</div>
-                            <div class="btn btn-secondary chord-btn">Minor</div>
-                            <div class="btn btn-secondary chord-btn">Diminished</div>
-                            <div class="btn btn-secondary chord-btn">Augmented</div>
+                        <div class="text-center m-2" id="triad">
+                            <div class="btn btn-secondary triad-btn">Major</div>
+                            <div class="btn btn-secondary triad-btn">minor</div>
+                            <div class="btn btn-secondary triad-btn">diminished</div>
+                            <div class="btn btn-secondary triad-btn">augmented</div>
+                            <div class="btn btn-secondary triad-btn">sus2</div>
+                            <div class="btn btn-secondary triad-btn">sus4</div>
+                        </div>
+                        <div class="text-center m-2" id="seventh">
+                            <div class="btn btn-secondary seventh-btn">maj7</div>
+                            <div class="btn btn-secondary seventh-btn">7</div>
+                            <div class="btn btn-secondary seventh-btn">6</div>
+                            <div class="btn btn-secondary seventh-btn">m7</div>
+                            <div class="btn btn-secondary seventh-btn">mMaj7</div>
+                            <div class="btn btn-secondary seventh-btn">m6</div>
+                            <div class="btn btn-secondary seventh-btn">half diminished</div>
+                            <div class="btn btn-secondary seventh-btn">full diminished</div>
+                            <div class="btn btn-secondary seventh-btn">augmented 7</div>
+                            <div class="btn btn-secondary seventh-btn">Maj7sus2</div>
+                            <div class="btn btn-secondary seventh-btn">7sus2</div>
+                            <div class="btn btn-secondary seventh-btn">Maj7sus4</div>
+                            <div class="btn btn-secondary seventh-btn">7sus4</div>
                         </div>
                         <div class="text-center m-2" id="extensions">
-                            <div class="btn btn-secondary extension-btn">sus2</div>
-                            <div class="btn btn-secondary extension-btn">sus4</div>
-                            <div class="btn btn-secondary extension-btn">b5</div>
                             <div class="btn btn-secondary extension-btn">#5</div>
-                            <div class="btn btn-secondary extension-btn">9</div>
-                            <div class="btn btn-secondary extension-btn">b9</div>
                             <div class="btn btn-secondary extension-btn">#9</div>
-                            <div class="btn btn-secondary extension-btn">11</div>
                             <div class="btn btn-secondary extension-btn">#11</div>
-                            <div class="btn btn-secondary extension-btn">13</div>
+                            <div class="btn btn-secondary extension-btn">b5</div>
+                            <div class="btn btn-secondary extension-btn">b9</div>
                             <div class="btn btn-secondary extension-btn">b13</div>
+                            <div class="btn btn-secondary extension-btn">6/9</div>
                         </div>
                         <div class="text-center m-2" id="scales">
-                            <div class="btn btn-secondary extension-btn">Locrian</div>
-                            <div class="btn btn-secondary extension-btn">Chromatic</div>
-                            <div class="btn btn-secondary extension-btn">Monochromatic</div>
-                            <div class="btn btn-secondary extension-btn">Hylian</div>
-                            <div class="btn btn-secondary extension-btn">Lovecraftian #666</div>
+                            <div class="btn btn-secondary">Locrian</div>
+                            <div class="btn btn-secondary">Chromatic</div>
+                            <div class="btn btn-secondary">Monochromatic</div>
+                            <div class="btn btn-secondary">Hylian</div>
+                            <div class="btn btn-secondary">Lovecraftian #666</div>
                         </div>
                     </div>
                 </div>

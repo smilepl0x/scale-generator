@@ -1,9 +1,13 @@
 html, body {
-    background-image: radial-gradient(black, purple, black);
+    background-image: radial-gradient(#333, black);
     height: 100%;
 }
 
-#chords {
+#triad {
+    display: none;
+}
+
+#seventh {
     display: none;
 }
 
