@@ -10,8 +10,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-        <!--External JQ-->
-        <script src="externaljq.js"></script>
         <!-- Styles -->
         <link rel="stylesheet" href="./style.css">
     </head>
@@ -20,51 +18,18 @@
             <div class="row h-100">
                 <div class="col my-auto">
                     <div class="d-flex flex-column align-items-center">
-                        <div class="w-100 text-center m-2">
-                            <div type="button" class="btn btn-secondary w-100" id="select-chord">Please Select a Chord</div>
+                        <div class="w-75 text-center m-2">
+                            <div type="button" class="btn btn-secondary w-75" id="select-chord">Please Select a Chord</div>
                         </div>
-                        <div class="text-center m-2" id="triad">
-                            <div class="btn btn-secondary triad-btn">Major</div>
-                            <div class="btn btn-secondary triad-btn">minor</div>
-                            <div class="btn btn-secondary triad-btn">diminished</div>
-                            <div class="btn btn-secondary triad-btn">augmented</div>
-                            <div class="btn btn-secondary triad-btn">sus2</div>
-                            <div class="btn btn-secondary triad-btn">sus4</div>
-                        </div>
-                        <div class="text-center m-2" id="seventh">
-                            <div class="btn btn-secondary seventh-btn">maj7</div>
-                            <div class="btn btn-secondary seventh-btn">7</div>
-                            <div class="btn btn-secondary seventh-btn">6</div>
-                            <div class="btn btn-secondary seventh-btn">m7</div>
-                            <div class="btn btn-secondary seventh-btn">mMaj7</div>
-                            <div class="btn btn-secondary seventh-btn">m6</div>
-                            <div class="btn btn-secondary seventh-btn">half diminished</div>
-                            <div class="btn btn-secondary seventh-btn">full diminished</div>
-                            <div class="btn btn-secondary seventh-btn">augmented 7</div>
-                            <div class="btn btn-secondary seventh-btn">Maj7sus2</div>
-                            <div class="btn btn-secondary seventh-btn">7sus2</div>
-                            <div class="btn btn-secondary seventh-btn">Maj7sus4</div>
-                            <div class="btn btn-secondary seventh-btn">7sus4</div>
-                        </div>
-                        <div class="text-center m-2" id="extensions">
-                            <div class="btn btn-secondary extension-btn">#5</div>
-                            <div class="btn btn-secondary extension-btn">#9</div>
-                            <div class="btn btn-secondary extension-btn">#11</div>
-                            <div class="btn btn-secondary extension-btn">b5</div>
-                            <div class="btn btn-secondary extension-btn">b9</div>
-                            <div class="btn btn-secondary extension-btn">b13</div>
-                            <div class="btn btn-secondary extension-btn">6/9</div>
-                        </div>
-                        <div class="text-center m-2" id="scales">
-                            <div class="btn btn-secondary">Locrian</div>
-                            <div class="btn btn-secondary">Chromatic</div>
-                            <div class="btn btn-secondary">Monochromatic</div>
-                            <div class="btn btn-secondary">Hylian</div>
-                            <div class="btn btn-secondary">Lovecraftian #666</div>
-                        </div>
+                        <div class="text-center m-2" id="triads"></div>
+                        <div class="text-center m-2" id="sevenths"></div>
+                        <div class="text-center m-2" id="extensions"></div>
+                        <div class="text-center m-2" id="scales"></div>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- External JS -->
+        <script src="home.js"></script>
     </body>
 </html>
