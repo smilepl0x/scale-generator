@@ -1,99 +1,111 @@
 const app = {
     triads: ["Major", "minor", "diminished", "augmented", "sus2", "sus4"],
-    sevenths: ["maj7", "7", "6", "m7", "mMaj7", "m6", "half diminished", "full diminished", "augmented 7", "Maj7sus2", "7sus2", "Maj7sus4", "7sus4"],
     extensions: ["#5", "#9", "#11", "b5", "b9", "b13", "6/9"],
-    scales: ["Ionian", "Dorian", "Phrygian", "Lydian", "Mixolydian", "Aeolian", "Locrian", "Harmonic minor","Locrian #6", "Ionian #5", "Dorian #4",
-            "Phrygian #3", "Lydian #2", "Melodic minor", "Dorian b2", "Lydian augmented", "Lydian dominant", "Mixolydian b6", "Locrian ♮2", "Altered",
-            "WH (fully diminished)", "HW (dominant diminished)", "Whole tone"],
-    userScales: Array()
 }
 
-const scales = {
+const scales = [
     // Major
-    ionian: [1, 3, 5, 6, 8, 10, 12],
-    dorian: [1, 3, 4, 6, 8, 10, 11],
-    phrygian: [1, 2, 4, 6, 8, 9, 11],
-    lydian: [1, 3, 5, 7, 8, 10, 12],
-    mixolydian: [1, 3, 5, 6, 8, 10, 12],
-    aeolian: [1, 3, 4, 6, 8, 9, 11],
-    locrian: [1, 2, 4, 6, 7, 9, 11],
+    {name: "Ionian", zero: 0, one: 2, two: 4, three: 5, four: 7, five: 8, six: 11},
+    {name: "Dorian", zero: 0, one: 2, two: 3, three: 5, four: 7, five: 9, six: 10},
+    {name: "Phrygian", zero: 0, one: 1, two: 3, three: 5, four: 7, five: 8, six: 10},
+    {name: "Lydian", zero: 0, one: 2, two: 4, three: 6, four: 7, five: 9, six: 11},
+    {name: "Mixolydian", zero: 0, one: 2, two: 4, three: 5, four: 7, five: 9, six: 11},
+    {name: "Aeolian", zero: 0, one: 2, two: 3, three: 5, four: 7, five: 8, six: 10},
+    {name: "Locrian", zero: 0, one: 1, two: 3, three: 5, four: 6, five: 8, six: 10},
 
     // Harmonic Minor
-    harmonic_minor: [1, 3, 4, 6, 8, 9, 12],
-    locrian_6: [1, 2, 4, 6, 7, 10, 11],
-    ionian_5: [1, 3, 5, 6, 9, 10, 12],
-    dorian_4: [1, 3, 4, 7, 8, 10, 11],
-    phrygian_3: [1, 2, 5, 6, 8, 9, 11],
-    lydian_2: [1, 4, 5, 7, 8, 10, 12],
+    {name: "Harmonic Minor", zero: 0, one: 2, two: 3, three: 5, four: 7, five: 8, six: 11},
+    {name: "Locrian #6", zero: 0, one: 1, two: 3, three: 5, four: 6, five: 9, six: 10},
+    {name: "Ionian #5", zero: 0, one: 2, two: 4, three: 5, four: 8, five: 9, six: 11},
+    {name: "Dorian #4", zero: 0, one: 2, two: 3, three: 6, four: 7, five: 9, six: 10},
+    {name: "Phrygian #3", zero: 0, one: 1, two: 4, three: 5, four: 7, five: 8, six: 10},
+    {name: "Lydian #2", zero: 0, one: 3, two: 4, three: 6, four: 7, five: 9, six: 11},
+    {name: "Ultralocrian", zero: 0, one: 1, two: 3, three: 4, four: 6, five: 8, six: 9},
 
     // Melodic Minor
-    melodic_minor: [1, 3, 4, 6, 8, 10, 12],
-    dorian_b2: [1, 2, 4, 6, 8, 10, 11],
-    lydian_augmented: [1, 3, 5, 7, 9, 10, 12],
-    lydian_dominant: [1, 3, 5, 7, 8, 10, 11],
-    mixolydian_b6: [1, 3, 5, 6, 8, 9, 11],
-    locrian_nat_2: [1, 3, 4, 6, 7, 9, 11],
-    altered: [1, 2, 4, 5, 7, 9, 11],
+    {name: "Melodic Minor", zero: 0, one: 2, two: 3, three: 5, four: 7, five: 9, six: 11},
+    {name: "Dorian b2", zero: 0, one: 1, two: 3, three: 5, four: 7, five: 9, six: 10},
+    {name: "Lydian Augmented", zero: 0, one: 2, two: 4, three: 6, four: 8, five: 9, six: 11},
+    {name: "Lydian Dominant", zero: 0, one: 2, two: 4, three: 6, four: 7, five: 9, six: 10},
+    {name: "Mixolydian b6", zero: 0, one: 2, two: 4, three: 5, four: 7, five: 8, six: 10},
+    {name: "Locrian ♮2", zero: 0, one: 2, two: 3, three: 5, four: 6, five: 8, six: 10},
+    {name: "Altered", zero: 0, one: 1, two: 3, three: 4, four: 6, five: 8, six: 10},
 
     // Harmonic Major
-    harmonic_major: [1, 3, 5, 6, 8, 9, 12],
-    dorian_b5: [1, 3, 4, 6, 7, 10, 11],
-    phrygian_b4: [1, 2, 4, 5, 8, 9, 11],
-    lydian_minor: [1, 3, 4, 7, 8, 10, 12],
-    mixolydian_b9: [1, 2, 5, 6, 8, 10, 11],
-    lydian_aug_9: [1, 4, 5, 7, 9, 10, 12],
-    locrian_bb7: [1, 2, 4, 6, 7, 9, 10],
+    {name: "Harmonic Major", zero: 0, one: 2, two: 4, three: 5, four: 7, five: 8, six: 11},
+    {name: "Dorian b5", zero: 0, one: 2, two: 3, three: 5, four: 6, five: 9, six: 10},
+    {name: "Phrygian b4", zero: 0, one: 1, two: 3, three: 4, four: 7, five: 8, six: 10},
+    {name: "Lydian Minor", zero: 0, one: 2, two: 3, three: 6, four: 7, five: 9, six: 11},
+    {name: "Mixolydian b9", zero: 0, one: 1, two: 4, three: 5, four: 7, five: 9, six: 10},
+    {name: "Lydian Augmented #2", zero: 0, one: 3, two: 4, three: 6, four: 8, five: 9, six: 11},
+    {name: "Locrian bb7", zero: 0, one: 1, two: 3, three: 5, four: 6, five: 8, six: 9},
 
     // Diminished
-    wh_fully_diminished: [1, 3, 4, 6, 7, 9, 10, 12],
-    hw_dominant_diminished: [1, 2, 4, 5, 7, 8, 10, 11],
+    {name: "WH (fully diminished)", zero: 0, one: 2, two: 3, three: 5, four: 6, five: 8, six: 9, seven: 11},
+    {name: "HW (dominant diminished)", zero: 0, one: 1, two: 3, three: 4, four: 6, five: 7, six: 9, seven: 10},
 
     // Hexatonic
-    whole_tone: [1, 3, 5, 7, 9, 11],
-    augmented: [1, 4, 5, 8, 9, 12]
-}
+    {name: "Whole Tone", zero: 0, one: 2, two: 4, three: 6, four: 8, five: 10},
+    {name: "Augmented", zero: 0, one: 3, two: 4, three: 7, four: 8, five: 11},
+    {name: "Major Blues", zero: 0, one: 2, two: 3, three: 4, four: 7, five: 9},
+    {name: "Minor Blues", zero: 0, one: 3, two: 5, three: 6, four: 7, five: 10}
+]
 
+// The object the user builds
 let userChord = {
-    one: 1,
+    zero: 0,
+    one: null,
     two: null,
     three: null,
     four: null,
     five: null,
     six: null,
-    seven: null,
-    eight: null
+    seven: null
 }
 
+// Updates userChord with chord components
 function userChordHandler(chordComponent) {
     switch (chordComponent) {
         case "Major": {
-            userChord.three = 5;
-            userChord.five = 8;
+            userChord.two = 4;
+            userChord.four = 7;
             break;
         }
         case "minor": {
-            userChord.three = 4;
-            userChord.five = 8;
+            userChord.two = 3;
+            userChord.four = 7;
             break;
         }
         case "diminished": {
-            userChord.three = 4;
-            userChord.five = 7;
+            userChord.two = 3;
+            userChord.four = 6;
             break;
         }
         case "augmented": {
-            userChord.three = 5;
-            userChord.five = 9;
+            userChord.two = 4;
+            userChord.four = 8;
             break;
         }
         case "sus2": {
-            userChord.three = 3;
-            userChord.five = 8;
+            userChord.two = 2;
+            userChord.four = 7;
             break;
         }
         case "sus4": {
-            userChord.three = 6;
-            userChord.five = 8;
+            userChord.two = 5;
+            userChord.four = 7;
+            break;
+        }
+        case "maj7": {
+            userChord.six = 11;
+            break;
+        }
+        case "maj7": {
+            userChord.six = 10;
+            break;
+        }
+        case "maj7": {
+            userChord.six = 9;
             break;
         }
         default: {
@@ -101,21 +113,20 @@ function userChordHandler(chordComponent) {
             break;
         }
     }
-
-    console.log(userChord);
 }
 
 // Create triad buttons
 function createTriads() {
     let triadDiv = document.getElementById("triads");
     for (let triad of app.triads) {
-        triadDiv.innerHTML += `<div class="btn btn-secondary m-2 triad-btn">${triad}</div>`;
+        triadDiv.innerHTML += `<div class="btn btn-secondary w-50 m-2 triad-btn">${triad}</div>`;
     }
 }
 
 
 // Create sevenths buttons
 function createSevenths(triad) {
+
     // Grab div and clear it
     let seventhsDiv = document.getElementById("sevenths");
     seventhsDiv.innerHTML = null;
@@ -154,7 +165,7 @@ function createSevenths(triad) {
 
     // Load div
     for (let result of results) {
-        seventhsDiv.innerHTML += `<div class="btn btn-secondary m-2 seventh-btn">${result}</div>`;
+        seventhsDiv.innerHTML += `<div class="btn btn-secondary w-50 m-2 seventh-btn">${result}</div>`;
     }
 }
 
@@ -162,21 +173,48 @@ function createSevenths(triad) {
 function createExtensions() {
     let extensionsDiv = document.getElementById("extensions");
     for (let extension of app.extensions) {
-        extensionsDiv.innerHTML += `<div class="btn btn-secondary m-2 extension-btn">${extension}</div>`;
+        extensionsDiv.innerHTML += `<div class="btn btn-secondary w-50 m-2 extension-btn">${extension}</div>`;
     }
 }
 
-// Create scales
-let scalesDiv = document.getElementById("scales");
-for (let scale of app.scales) {
-    scalesDiv.innerHTML += `<div class="btn btn-secondary m-2">${scale}</div>`;
+// checks if passed scale matches userChord
+function matches(scale) {
+    let matches = false;
+
+    for (let step in userChord) {
+        if (userChord[step] === null) {
+            continue;
+        }
+
+        if (userChord[step] === scale[step]) {
+            matches = true;
+        }
+        else {
+            matches = false;
+            break;
+        }
+    }
+
+    return matches;
 }
 
 // Update scales
-function updateScales() {
-    // TODO: Write logic to update the scales div when user makes a selection
-}
+function updateScales(userChord) {
+    // Clear userScales
+    let userScales = [];
 
+    // Pass each scale into the matches() function to see if it matches userChord.
+    scalesResult = scales.filter(scale => matches(scale));
+
+    // Append each matching scale to userScales
+    scalesResult.forEach(scale => userScales.push(scale.name));
+
+    // Update the scale div with results.
+    let scalesDiv = document.getElementById("scaleFlex");
+    for (let scale of userScales) {
+        scalesDiv.innerHTML += `<div class="flex-grow-1 btn-secondary rounded p-2 m-2 scales-btn">${scale}</div>`
+    }
+}
 
 $(document).ready(function(){
 
@@ -189,22 +227,27 @@ $(document).ready(function(){
     $(".triad-btn").click(function(){
         $("#select-chord").text($(this).text());
         $(this).parent().slideUp("slow");
-        $("#sevenths").slideDown("slow");
+
         userChordHandler($(this).text());
+        updateScales(userChord);
         
         createSevenths($(this).text());
+        $("#sevenths").slideDown("slow");
 
         $(".seventh-btn").click(function(){
             $("#select-chord").text($("#select-chord").text() + " " + $(this).text());
             $(this).parent().slideUp("slow");
-            $("#extensions").slideDown("slow");
+
+            userChordHandler($(this).text());
+            updateScales(userChord);
 
             createExtensions($(this).text());
+            $("#extensions").slideDown("slow");
 
             $(".extension-btn").click(function(){
                 $("#select-chord").text($("#select-chord").text() + " " + $(this).text())
                 $("#extensions").slideUp("slow");
-                $("#scales").slideDown("slow");
+                console.log(Object.entries(userChord));
             })
         })
     })
