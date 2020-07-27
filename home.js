@@ -1,111 +1,106 @@
 const app = {
     triads: ["Major", "minor", "diminished", "augmented", "sus2", "sus4"],
-    extensions: ["#5", "#9", "#11", "b5", "b9", "b13", "6/9"],
 }
 
 const scales = [
     // Major
-    {name: "Ionian", zero: 0, one: 2, two: 4, three: 5, four: 7, five: 8, six: 11},
-    {name: "Dorian", zero: 0, one: 2, two: 3, three: 5, four: 7, five: 9, six: 10},
-    {name: "Phrygian", zero: 0, one: 1, two: 3, three: 5, four: 7, five: 8, six: 10},
-    {name: "Lydian", zero: 0, one: 2, two: 4, three: 6, four: 7, five: 9, six: 11},
-    {name: "Mixolydian", zero: 0, one: 2, two: 4, three: 5, four: 7, five: 9, six: 11},
-    {name: "Aeolian", zero: 0, one: 2, two: 3, three: 5, four: 7, five: 8, six: 10},
-    {name: "Locrian", zero: 0, one: 1, two: 3, three: 5, four: 6, five: 8, six: 10},
+    {name: "Ionian", intervals: [0, 2, 4, 5, 7, 8, 11]},
+    {name: "Dorian", intervals: [0, 2, 3, 5, 7, 9, 10]},
+    {name: "Phrygian", intervals: [0, 1, 3, 5, 7, 8, 10]},
+    {name: "Lydian", intervals: [0, 2, 4, 6, 7, 9, 11]},
+    {name: "Mixolydian", intervals: [0, 2, 4, 5, 7, 9, 11]},
+    {name: "Aeolian", intervals: [0, 2, 3, 5, 7, 8, 10]},
+    {name: "Locrian", intervals: [0, 1, 3, 5, 6, 8, 10]},
 
     // Harmonic Minor
-    {name: "Harmonic Minor", zero: 0, one: 2, two: 3, three: 5, four: 7, five: 8, six: 11},
-    {name: "Locrian #6", zero: 0, one: 1, two: 3, three: 5, four: 6, five: 9, six: 10},
-    {name: "Ionian #5", zero: 0, one: 2, two: 4, three: 5, four: 8, five: 9, six: 11},
-    {name: "Dorian #4", zero: 0, one: 2, two: 3, three: 6, four: 7, five: 9, six: 10},
-    {name: "Phrygian #3", zero: 0, one: 1, two: 4, three: 5, four: 7, five: 8, six: 10},
-    {name: "Lydian #2", zero: 0, one: 3, two: 4, three: 6, four: 7, five: 9, six: 11},
-    {name: "Ultralocrian", zero: 0, one: 1, two: 3, three: 4, four: 6, five: 8, six: 9},
+    {name: "Harmonic Minor", intervals: [0, 2, 3, 5, 7, 8, 11]},
+    {name: "Locrian #6", intervals: [0, 2, 3, 5, 7, 8, 11]},
+    {name: "Ionian #5", intervals: [0, 2, 4, 5, 8, 9, 11]},
+    {name: "Dorian #4", intervals: [0, 2, 3, 6, 7, 9, 10]},
+    {name: "Phrygian #3", intervals: [0, 1, 4, 5, 7, 8, 10]},
+    {name: "Lydian #2", intervals: [0, 3, 4, 6, 7, 9, 11]},
+    {name: "Ultralocrian", intervals: [0, 1, 3, 4, 6, 8, 9]},
 
     // Melodic Minor
-    {name: "Melodic Minor", zero: 0, one: 2, two: 3, three: 5, four: 7, five: 9, six: 11},
-    {name: "Dorian b2", zero: 0, one: 1, two: 3, three: 5, four: 7, five: 9, six: 10},
-    {name: "Lydian Augmented", zero: 0, one: 2, two: 4, three: 6, four: 8, five: 9, six: 11},
-    {name: "Lydian Dominant", zero: 0, one: 2, two: 4, three: 6, four: 7, five: 9, six: 10},
-    {name: "Mixolydian b6", zero: 0, one: 2, two: 4, three: 5, four: 7, five: 8, six: 10},
-    {name: "Locrian ♮2", zero: 0, one: 2, two: 3, three: 5, four: 6, five: 8, six: 10},
-    {name: "Altered", zero: 0, one: 1, two: 3, three: 4, four: 6, five: 8, six: 10},
+    {name: "Melodic Minor", intervals: [0, 2, 3, 5, 7, 9, 11]},
+    {name: "Dorian b2", intervals: [0, 1, 3, 5, 7, 9, 10]},
+    {name: "Lydian Augmented", intervals: [0, 2, 4, 6, 8, 9, 11]},
+    {name: "Lydian Dominant", intervals: [0, 2, 4, 6, 7, 9, 10]},
+    {name: "Mixolydian b6", intervals: [0, 2, 4, 6, 7, 9, 10]},
+    {name: "Locrian ♮2", intervals: [0, 2, 3, 5, 6, 8, 10]},
+    {name: "Altered", intervals: [0, 1, 3, 4, 6, 8, 10]},
 
     // Harmonic Major
-    {name: "Harmonic Major", zero: 0, one: 2, two: 4, three: 5, four: 7, five: 8, six: 11},
-    {name: "Dorian b5", zero: 0, one: 2, two: 3, three: 5, four: 6, five: 9, six: 10},
-    {name: "Phrygian b4", zero: 0, one: 1, two: 3, three: 4, four: 7, five: 8, six: 10},
-    {name: "Lydian Minor", zero: 0, one: 2, two: 3, three: 6, four: 7, five: 9, six: 11},
-    {name: "Mixolydian b9", zero: 0, one: 1, two: 4, three: 5, four: 7, five: 9, six: 10},
-    {name: "Lydian Augmented #2", zero: 0, one: 3, two: 4, three: 6, four: 8, five: 9, six: 11},
-    {name: "Locrian bb7", zero: 0, one: 1, two: 3, three: 5, four: 6, five: 8, six: 9},
+    {name: "Harmonic Major", intervals: [0, 2, 4, 5, 7, 8, 11]},
+    {name: "Dorian b5", intervals: [0, 2, 3, 5, 6, 9, 10]},
+    {name: "Phrygian b4", intervals: [0, 1, 3, 4, 7, 8, 10]},
+    {name: "Lydian Minor", intervals: [0, 2, 3, 6, 7, 9, 11]},
+    {name: "Mixolydian b9", intervals: [0, 1, 4, 5, 7, 9, 10]},
+    {name: "Lydian Augmented #2", intervals: [0, 3, 4, 6, 8, 9, 11]},
+    {name: "Locrian bb7", intervals: [0, 1, 3, 5, 6, 8, 9]},
 
     // Diminished
-    {name: "WH (fully diminished)", zero: 0, one: 2, two: 3, three: 5, four: 6, five: 8, six: 9, seven: 11},
-    {name: "HW (dominant diminished)", zero: 0, one: 1, two: 3, three: 4, four: 6, five: 7, six: 9, seven: 10},
+    {name: "WH (fully diminished)", intervals: [0, 2, 3, 5, 6, 8, 9, 11]},
+    {name: "HW (dominant diminished)", intervals: [0, 1, 3, 4, 6, 7, 9, 10]},
 
     // Hexatonic
-    {name: "Whole Tone", zero: 0, one: 2, two: 4, three: 6, four: 8, five: 10},
-    {name: "Augmented", zero: 0, one: 3, two: 4, three: 7, four: 8, five: 11},
-    {name: "Major Blues", zero: 0, one: 2, two: 3, three: 4, four: 7, five: 9},
-    {name: "Minor Blues", zero: 0, one: 3, two: 5, three: 6, four: 7, five: 10}
+    {name: "Whole Tone", intervals: [0, 2, 4, 6, 8, 10]},
+    {name: "Augmented", intervals: [0, 3, 4, 7, 8, 11]},
+    {name: "Major Blues", intervals: [0, 2, 3, 4, 7, 9]},
+    {name: "Minor Blues", intervals: [0, 3, 5, 6, 7, 10]}
 ]
 
-// The object the user builds
-let userChord = {
-    zero: 0,
-    one: null,
-    two: null,
-    three: null,
-    four: null,
-    five: null,
-    six: null,
-    seven: null
-}
+// The array the user builds
+let userChord = [0];
 
 // Updates userChord with chord components
 function userChordHandler(chordComponent) {
     switch (chordComponent) {
         case "Major": {
-            userChord.two = 4;
-            userChord.four = 7;
+            userChord.push(4, 7);
             break;
         }
         case "minor": {
-            userChord.two = 3;
-            userChord.four = 7;
+            userChord.push(3, 7)
             break;
         }
         case "diminished": {
-            userChord.two = 3;
-            userChord.four = 6;
+            userChord.push(3, 6);
             break;
         }
         case "augmented": {
-            userChord.two = 4;
-            userChord.four = 8;
+            userChord.push(4, 8);
             break;
         }
         case "sus2": {
-            userChord.two = 2;
-            userChord.four = 7;
+            userChord.push(2, 7);
             break;
         }
         case "sus4": {
-            userChord.two = 5;
-            userChord.four = 7;
+            userChord.push(5, 7);
             break;
         }
-        case "maj7": {
-            userChord.six = 11;
+        case "maj7":
+        case "mMaj7": 
+        case "augmented Maj7": 
+        case "Maj7sus2":
+        case "Maj7sus4": {
+            userChord.push(11);
             break;
         }
-        case "maj7": {
-            userChord.six = 10;
+        case "7":
+        case "m7":
+        case "half diminshed":
+        case "augmented 7":
+        case "7sus2":
+        case "7sus4": {
+            userChord.push(10);
             break;
         }
-        case "maj7": {
-            userChord.six = 9;
+        case "6":
+        case "m6":
+        case "full diminished": {
+            userChord.push(9);
             break;
         }
         default: {
@@ -124,7 +119,7 @@ function createTriads() {
 }
 
 
-// Create sevenths buttons
+// Create possible seventh buttons using passed triad
 function createSevenths(triad) {
 
     // Grab div and clear it
@@ -169,8 +164,8 @@ function createSevenths(triad) {
     }
 }
 
-// Create extensions buttons
-function createExtensions() {
+// Create possible extension buttons using passed seventh
+function createExtensions(seventh) {
     let extensionsDiv = document.getElementById("extensions");
     for (let extension of app.extensions) {
         extensionsDiv.innerHTML += `<div class="btn btn-secondary w-50 m-2 extension-btn">${extension}</div>`;
@@ -179,28 +174,16 @@ function createExtensions() {
 
 // checks if passed scale matches userChord
 function matches(scale) {
-    let matches = false;
-
-    for (let step in userChord) {
-        if (userChord[step] === null) {
-            continue;
-        }
-
-        if (userChord[step] === scale[step]) {
-            matches = true;
-        }
-        else {
-            matches = false;
-            break;
-        }
-    }
-
-    return matches;
+    return userChord.every(i => scale.intervals.includes(i))
 }
 
 // Update scales
 function updateScales(userChord) {
-    // Clear userScales
+    // Grab scales div and clear it
+    let scalesDiv = document.getElementById("scaleFlex");
+    scalesDiv.innerHTML = null;
+
+    // Create array
     let userScales = [];
 
     // Pass each scale into the matches() function to see if it matches userChord.
@@ -210,7 +193,6 @@ function updateScales(userChord) {
     scalesResult.forEach(scale => userScales.push(scale.name));
 
     // Update the scale div with results.
-    let scalesDiv = document.getElementById("scaleFlex");
     for (let scale of userScales) {
         scalesDiv.innerHTML += `<div class="flex-grow-1 btn-secondary rounded p-2 m-2 scales-btn">${scale}</div>`
     }
@@ -247,7 +229,6 @@ $(document).ready(function(){
             $(".extension-btn").click(function(){
                 $("#select-chord").text($("#select-chord").text() + " " + $(this).text())
                 $("#extensions").slideUp("slow");
-                console.log(Object.entries(userChord));
             })
         })
     })
