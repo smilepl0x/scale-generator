@@ -1,3 +1,5 @@
+'use strict';
+
 const app = {
     triads: ["Major", "minor", "diminished", "augmented", "sus2", "sus4"],
     alterations: ["#5", "♭5", "#9", "♭9", "#11", "♭13"]
@@ -46,9 +48,7 @@ const scales = [
 
     // Hexatonic
     {name: "Whole Tone", intervals: [0, 2, 4, 6, 8, 10]},
-    {name: "Augmented", intervals: [0, 3, 4, 7, 8, 11]},
-    {name: "Major Blues", intervals: [0, 2, 3, 4, 5, 6, 7, 9, 10, 11]},
-    {name: "Minor Blues", intervals: [0, 1, 2, 3, 5, 6, 7, 8, 9, 10]}
+    {name: "Augmented", intervals: [0, 3, 4, 7, 8, 11]}
 ]
 
 // The array the user builds
@@ -246,7 +246,6 @@ function createExtensions(seventh) {
     const extensionsDiv = document.getElementById("extensions");
     extensionsDiv.innerHTML = null;
 
-    console.log(typeof(seventh));
     let results = [];
 
     switch (seventh) {
@@ -316,10 +315,16 @@ function updateScales(userChord) {
     let userScales = [];
 
     // Pass each scale into the matches() function to see if it matches userChord.
-    scalesResult = scales.filter(scale => matches(scale));
+    let scalesResult = scales.filter(scale => matches(scale));
 
     // Append each matching scale to userScales
     scalesResult.forEach(scale => userScales.push(scale.name));
+
+    // Outlier rule for stupid blues scales
+    const bluesScale = [0, 4, 7, 10, 3];
+    if (userChord.every((val, index) => val === bluesScale[index]) && userChord.length === bluesScale.length) {
+        userScales.push("Blues Scale");
+    }
 
     // Update the scale div with results.
     for (let scale of userScales) {
@@ -352,7 +357,7 @@ $(document).ready(function(){
             createAlterations();
             $(".alteration-btn").click(function(){
                 $("#select-chord").text($("#select-chord").text() + $(this).text());
-                $(this).addClass("disabled");
+                $(this).hide();
 
                 userChordHandler($(this).text());
                 updateScales(userChord);
