@@ -1,10 +1,11 @@
 const app = {
     triads: ["Major", "minor", "diminished", "augmented", "sus2", "sus4"],
+    alterations: ["#5", "♭5", "#9", "♭9", "#11", "♭13"]
 }
 
 const scales = [
     // Major
-    {name: "Ionian", intervals: [0, 2, 4, 5, 7, 8, 11]},
+    {name: "Ionian", intervals: [0, 2, 4, 5, 7, 9, 11]},
     {name: "Dorian", intervals: [0, 2, 3, 5, 7, 9, 10]},
     {name: "Phrygian", intervals: [0, 1, 3, 5, 7, 8, 10]},
     {name: "Lydian", intervals: [0, 2, 4, 6, 7, 9, 11]},
@@ -80,7 +81,7 @@ function userChordHandler(chordComponent) {
             userChord.push(5, 7);
             break;
         }
-        case "maj7":
+        case "Maj7":
         case "mMaj7": 
         case "augmented Maj7": 
         case "Maj7sus2":
@@ -103,16 +104,91 @@ function userChordHandler(chordComponent) {
             userChord.push(9);
             break;
         }
+        case "Maj9":
+        case "9":
+        case "m9":
+        case "mMaj9":
+        case "9 (no 3)":
+        case "9sus4":
+        case "Maj11 (no 3)":
+        case "11 (no 3)": {
+            userChord.push(2);
+            break;
+        }
+        case "Maj11":
+        case "11":
+        case "m11": 
+        case "mMaj11": {
+            userChord.push(2, 5);
+            break;
+        }
+        case "Maj13":
+        case "13":
+        case "m13":
+        case "mMaj13": {
+            userChord.push(2, 5, 9);
+            break;
+        }
+        case "Maj9sus4": 
+        case "Maj11sus2": 
+        case "11sus2": {
+            userChord.push(5);
+            break;
+        }
+        case "Maj13sus2":
+        case "13sus2": {
+            userChord.push(5, 9)
+        }
+        case "Maj13sus4":
+        case "13sus4": {
+            userChord.push(2, 9)
+        }
+        case "#5": {
+            userChord[userChord.indexOf(7)] = 8;
+            break;
+        }
+        case "♭5": {
+            userChord[userChord.indexOf(7)] = 6;
+            break;
+        }
+        case "#9": {
+            if (userChord[userChord.indexOf(2)] > -1) {
+                userChord[userChord.indexOf(2)] = 3;
+            }
+            else {
+                userChord.push(3);
+            }
+            break;
+        }
+        case "♭9": {
+            if (userChord[userChord.indexOf(2)] > -1) {
+                userChord[userChord.indexOf(2)] = 1;
+            }
+            else {
+                userChord.push(1);
+            }
+            break;
+        }
+        case "#11": {
+            userChord.push(6);
+            break;
+        }
+        case "♭13": {
+            userChord.push(8);
+            break;
+        }
         default: {
             console.log("Something went wrong");
             break;
         }
     }
+
+    console.log(userChord);
 }
 
 // Create triad buttons
 function createTriads() {
-    let triadDiv = document.getElementById("triads");
+    const triadDiv = document.getElementById("triads");
     for (let triad of app.triads) {
         triadDiv.innerHTML += `<div class="btn btn-secondary w-50 m-2 triad-btn">${triad}</div>`;
     }
@@ -123,14 +199,14 @@ function createTriads() {
 function createSevenths(triad) {
 
     // Grab div and clear it
-    let seventhsDiv = document.getElementById("sevenths");
+    const seventhsDiv = document.getElementById("sevenths");
     seventhsDiv.innerHTML = null;
 
     let results = [];
 
     switch (triad) {
         case "Major": {
-            results = ["maj7", "7", "6"];
+            results = ["Maj7", "7", "6"];
             break;
         }
         case "minor": {
@@ -166,9 +242,62 @@ function createSevenths(triad) {
 
 // Create possible extension buttons using passed seventh
 function createExtensions(seventh) {
-    let extensionsDiv = document.getElementById("extensions");
-    for (let extension of app.extensions) {
-        extensionsDiv.innerHTML += `<div class="btn btn-secondary w-50 m-2 extension-btn">${extension}</div>`;
+    // Grab div and clear it
+    const extensionsDiv = document.getElementById("extensions");
+    extensionsDiv.innerHTML = null;
+
+    console.log(typeof(seventh));
+    let results = [];
+
+    switch (seventh) {
+        case "Maj7": {
+            results = ["Maj9", "Maj11", "Maj13"];
+            break;
+        }
+        case "7": {
+            results = ["9", "11", "13"];
+            break;
+        }
+        case "m7": {
+            results = ["m9", "m11", "m13"];
+            break;
+        }
+        case "mMaj7": {
+            results = ["mMaj9", "mMaj11", "mMaj13"];
+            break;
+        }
+        case "Maj7sus2": {
+            results = ["Maj9 (no 3)", "Maj11sus2", "Maj13sus2"];
+            break;
+        }
+        case "7sus2": {
+            results = ["9 (no 3)", "11sus2", "13sus2"];
+            break;
+        }
+        case "Maj7sus4": {
+            results = ["Maj9sus4", "Maj11 (no 3)", "Maj13sus4"];
+            break;
+        }
+        case "7sus4": {
+            results = ["9sus4", "11 (no 3)", "13sus4"];
+            break;
+        }
+        default: {
+            console.log("Something went wrong when creating the extensions");
+        }
+    }
+
+    // Load div
+    for (let result of results) {
+        extensionsDiv.innerHTML += `<div class="btn btn-secondary w-50 m-2 extension-btn">${result}</div>`;
+    }
+}
+
+function createAlterations() {
+    const alterationDiv = document.getElementById("alterationFlex");
+
+    for (let alteration of app.alterations) {
+        alterationDiv.innerHTML += `<div class="btn btn-secondary w-50 m-2 alteration-btn">${alteration}</div`;
     }
 }
 
@@ -198,13 +327,10 @@ function updateScales(userChord) {
     }
 }
 
+// JQuery
 $(document).ready(function(){
 
     createTriads();
-
-    $("#select-chord").click(function(){
-        $("#triads").slideDown("slow");
-    });
 
     $(".triad-btn").click(function(){
         $("#select-chord").text($(this).text());
@@ -217,18 +343,30 @@ $(document).ready(function(){
         $("#sevenths").slideDown("slow");
 
         $(".seventh-btn").click(function(){
-            $("#select-chord").text($("#select-chord").text() + " " + $(this).text());
+            $("#select-chord").text($(this).text());
             $(this).parent().slideUp("slow");
 
             userChordHandler($(this).text());
             updateScales(userChord);
 
+            createAlterations();
+            $(".alteration-btn").click(function(){
+                $("#select-chord").text($("#select-chord").text() + $(this).text());
+                $(this).addClass("disabled");
+
+                userChordHandler($(this).text());
+                updateScales(userChord);
+            })
+
             createExtensions($(this).text());
             $("#extensions").slideDown("slow");
 
             $(".extension-btn").click(function(){
-                $("#select-chord").text($("#select-chord").text() + " " + $(this).text())
-                $("#extensions").slideUp("slow");
+                $("#select-chord").text($(this).text())
+
+                userChordHandler($(this).text());
+                updateScales(userChord);
+
             })
         })
     })

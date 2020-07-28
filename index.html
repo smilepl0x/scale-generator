@@ -15,20 +15,27 @@
     </head>
     <body>
         <div class="container h-100">
-            <div class="row h-100">
+            <div class="row">
+                <div class="col my-auto">
+                    <div class="text-center m-2">
+                        <div class="display-4" id="select-chord">Please Select a Chord</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col my-auto">
                     <div class="d-flex flex-column align-items-center">
-                        <div class="w-75 text-center m-2">
-                            <div type="button" class="btn btn-secondary w-75" id="select-chord">Please Select a Chord</div>
-                        </div>
-                        <div class="text-center m-2" id="triads"></div>
-                        <div class="text-center m-2" id="sevenths"></div>
-                        <div class="text-center m-2" id="extensions"></div>
+                        <div class="w-75 text-center m-2" id="triads"></div>
+                        <div class="w-75 text-center m-2" id="sevenths"></div>
+                        <div class="w-75 text-center m-2" id="extensions"></div>
                     </div>
                 </div>
                 <div class="col my-auto">
-                    <div class="display-4 text-center">Scales</div>
-                    <div class="d-inline-flex flex-wrap text-center m-2" id=scaleFlex></div>
+                    <div class="d-inline-flex flex-wrap text-center m-2" id="alterationFlex"></div>
+                </div>
+                <div class="col my-auto">
+                    <div class="h5 text-center">Scales</div>
+                    <div class="d-inline-flex flex-wrap text-center m-2" id="scaleFlex"></div>
                 </div>
             </div>
         </div>
