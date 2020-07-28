@@ -358,7 +358,7 @@ $(document).ready(() => {
 
     // Display the directions and animate upon load
     $("#directions").click(() => {
-        $("#banner").animate({height: "25%", fontSize: "4vw"}, "slow");
+        $("#banner").animate({height: "50%", fontSize: "4vw"}, "slow");
         $("#display").fadeIn("slow");
     });
 
