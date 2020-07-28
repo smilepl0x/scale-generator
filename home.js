@@ -422,8 +422,11 @@ $(document).ready(() => {
         $("#buttons").text(null);
         $("#display-alterations").hide();
         updateScales(app.userChord);
-        $(this).hide();
         animateDirections("Modes for chord");
+        $(this).text("<");
+        $("#finished").click(function() {
+            location.reload()
+        });
     });
 
 });
