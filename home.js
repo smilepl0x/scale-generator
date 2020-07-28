@@ -111,7 +111,8 @@ function userChordHandler(chordComponent) {
         case "9 (no 3)":
         case "9sus4":
         case "Maj11 (no 3)":
-        case "11 (no 3)": {
+        case "11 (no 3)":
+        case "Maj9sus4": {
             userChord.push(2);
             break;
         }
@@ -129,7 +130,6 @@ function userChordHandler(chordComponent) {
             userChord.push(2, 5, 9);
             break;
         }
-        case "Maj9sus4": 
         case "Maj11sus2": 
         case "11sus2": {
             userChord.push(5);
