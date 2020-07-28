@@ -2,8 +2,12 @@
 
 const app = {
     triads: ["Major", "minor", "diminished", "augmented", "sus2", "sus4"],
-    alterations: ["#5", "♭5", "#9", "♭9", "#11", "♭13"]
+    alterations: ["#5", "♭5", "#9", "♭9", "#11", "♭13"],
+    userChord: [0]
 }
+
+// The array the user builds
+
 
 const scales = [
     // Major
@@ -51,34 +55,31 @@ const scales = [
     {name: "Augmented", intervals: [0, 3, 4, 7, 8, 11]}
 ]
 
-// The array the user builds
-let userChord = [0];
-
-// Updates userChord with chord components
+// Updates app.userChord with chord components
 function userChordHandler(chordComponent) {
     switch (chordComponent) {
         case "Major": {
-            userChord.push(4, 7);
+            app.userChord.push(4, 7);
             break;
         }
         case "minor": {
-            userChord.push(3, 7)
+            app.userChord.push(3, 7)
             break;
         }
         case "diminished": {
-            userChord.push(3, 6);
+            app.userChord.push(3, 6);
             break;
         }
         case "augmented": {
-            userChord.push(4, 8);
+            app.userChord.push(4, 8);
             break;
         }
         case "sus2": {
-            userChord.push(2, 7);
+            app.userChord.push(2, 7);
             break;
         }
         case "sus4": {
-            userChord.push(5, 7);
+            app.userChord.push(5, 7);
             break;
         }
         case "Maj7":
@@ -86,7 +87,7 @@ function userChordHandler(chordComponent) {
         case "augmented Maj7": 
         case "Maj7sus2":
         case "Maj7sus4": {
-            userChord.push(11);
+            app.userChord.push(11);
             break;
         }
         case "7":
@@ -95,86 +96,88 @@ function userChordHandler(chordComponent) {
         case "augmented 7":
         case "7sus2":
         case "7sus4": {
-            userChord.push(10);
+            app.userChord.push(10);
             break;
         }
         case "6":
         case "m6":
         case "full diminished": {
-            userChord.push(9);
+            app.userChord.push(9);
             break;
         }
         case "Maj9":
         case "9":
+        case "6/9":
         case "m9":
         case "mMaj9":
+        case "m6/9":
         case "9 (no 3)":
         case "9sus4":
         case "Maj11 (no 3)":
         case "11 (no 3)":
         case "Maj9sus4": {
-            userChord.push(2);
+            app.userChord.push(2);
             break;
         }
         case "Maj11":
         case "11":
         case "m11": 
         case "mMaj11": {
-            userChord.push(2, 5);
+            app.userChord.push(2, 5);
             break;
         }
         case "Maj13":
         case "13":
         case "m13":
         case "mMaj13": {
-            userChord.push(2, 5, 9);
+            app.userChord.push(2, 5, 9);
             break;
         }
         case "Maj11sus2": 
         case "11sus2": {
-            userChord.push(5);
+            app.userChord.push(5);
             break;
         }
         case "Maj13sus2":
         case "13sus2": {
-            userChord.push(5, 9)
+            app.userChord.push(5, 9)
         }
         case "Maj13sus4":
         case "13sus4": {
-            userChord.push(2, 9)
+            app.userChord.push(2, 9)
         }
         case "#5": {
-            userChord[userChord.indexOf(7)] = 8;
+            app.userChord[app.userChord.indexOf(7)] = 8;
             break;
         }
         case "♭5": {
-            userChord[userChord.indexOf(7)] = 6;
+            app.userChord[app.userChord.indexOf(7)] = 6;
             break;
         }
         case "#9": {
-            if (userChord[userChord.indexOf(2)] > -1) {
-                userChord[userChord.indexOf(2)] = 3;
+            if (app.userChord[app.userChord.indexOf(2)] > -1) {
+                app.userChord[app.userChord.indexOf(2)] = 3;
             }
             else {
-                userChord.push(3);
+                app.userChord.push(3);
             }
             break;
         }
         case "♭9": {
-            if (userChord[userChord.indexOf(2)] > -1) {
-                userChord[userChord.indexOf(2)] = 1;
+            if (app.userChord[app.userChord.indexOf(2)] > -1) {
+                app.userChord[app.userChord.indexOf(2)] = 1;
             }
             else {
-                userChord.push(1);
+                app.userChord.push(1);
             }
             break;
         }
         case "#11": {
-            userChord.push(6);
+            app.userChord.push(6);
             break;
         }
         case "♭13": {
-            userChord.push(8);
+            app.userChord.push(8);
             break;
         }
         default: {
@@ -183,7 +186,7 @@ function userChordHandler(chordComponent) {
         }
     }
 
-    console.log(userChord);
+    console.log(app.userChord);
 }
 
 // Create triad buttons
@@ -257,12 +260,20 @@ function createExtensions(seventh) {
             results = ["9", "11", "13"];
             break;
         }
+        case "6": {
+            results = ["6/9"];
+            break;
+        }
         case "m7": {
             results = ["m9", "m11", "m13"];
             break;
         }
         case "mMaj7": {
             results = ["mMaj9", "mMaj11", "mMaj13"];
+            break;
+        }
+        case "m6": {
+            results = ["m6/9"];
             break;
         }
         case "Maj7sus2": {
@@ -300,9 +311,9 @@ function createAlterations() {
     }
 }
 
-// checks if passed scale matches userChord
+// checks if passed scale matches app.userChord
 function matches(scale) {
-    return userChord.every(i => scale.intervals.includes(i))
+    return app.userChord.every(i => scale.intervals.includes(i))
 }
 
 // Update scales
@@ -314,7 +325,7 @@ function updateScales(userChord) {
     // Create array
     let userScales = [];
 
-    // Pass each scale into the matches() function to see if it matches userChord.
+    // Pass each scale into the matches() function to see if it matches app.userChord.
     let scalesResult = scales.filter(scale => matches(scale));
 
     // Append each matching scale to userScales
@@ -322,7 +333,7 @@ function updateScales(userChord) {
 
     // Outlier rule for stupid blues scales
     const bluesScale = [0, 4, 7, 10, 3];
-    if (userChord.every((val, index) => val === bluesScale[index]) && userChord.length === bluesScale.length) {
+    if (userChord.every((val, index) => val === bluesScale[index]) && app.userChord.length === bluesScale.length) {
         userScales.push("Blues Scale");
     }
 
@@ -342,7 +353,7 @@ $(document).ready(function(){
         $(this).parent().slideUp("slow");
 
         userChordHandler($(this).text());
-        updateScales(userChord);
+        updateScales(app.userChord);
         
         createSevenths($(this).text());
         $("#sevenths").slideDown("slow");
@@ -352,7 +363,7 @@ $(document).ready(function(){
             $(this).parent().slideUp("slow");
 
             userChordHandler($(this).text());
-            updateScales(userChord);
+            updateScales(app.userChord);
 
             createAlterations();
             $(".alteration-btn").click(function(){
@@ -360,7 +371,7 @@ $(document).ready(function(){
                 $(this).hide();
 
                 userChordHandler($(this).text());
-                updateScales(userChord);
+                updateScales(app.userChord);
             })
 
             createExtensions($(this).text());
@@ -370,7 +381,7 @@ $(document).ready(function(){
                 $("#select-chord").text($(this).text())
 
                 userChordHandler($(this).text());
-                updateScales(userChord);
+                updateScales(app.userChord);
 
             })
         })
