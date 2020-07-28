@@ -4,6 +4,10 @@ html, body {
     height: 100%;
 }
 
+.container {
+    max-height: 100%;
+}
+
 #banner {
     height: 100%;
     font-size: 5vw;
