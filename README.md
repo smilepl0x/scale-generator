@@ -1,2 +1,2 @@
 # scale-generator
- A simple app to help you find which chords fit into a music scale
+A simple app to help you find types of chords that fit into a musical mode
