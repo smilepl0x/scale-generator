@@ -15,7 +15,7 @@ const scales = [
 
     // Harmonic Minor
     {name: "Harmonic Minor", intervals: [0, 2, 3, 5, 7, 8, 11]},
-    {name: "Locrian #6", intervals: [0, 2, 3, 5, 7, 8, 11]},
+    {name: "Locrian #6", intervals: [0, 1, 3, 5, 6, 9, 10]},
     {name: "Ionian #5", intervals: [0, 2, 4, 5, 8, 9, 11]},
     {name: "Dorian #4", intervals: [0, 2, 3, 6, 7, 9, 10]},
     {name: "Phrygian #3", intervals: [0, 1, 4, 5, 7, 8, 10]},
