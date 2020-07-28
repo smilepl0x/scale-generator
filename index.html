@@ -15,35 +15,32 @@
     </head>
     <body>
         <div class="container h-100">
-            <div class="row">
+            <div class="row" id="banner">
                 <div class="col my-auto">
                     <div class="text-center m-2">
-                        <div class="display-4" id="select-chord">Please Select a Chord</div>
+                        <div id="directions">Please Select a Chord</div>
+                        <div class="display-4" id="chord"></div>
                     </div>
                 </div>
             </div>
-            <div class="row h-100">
-                <div class="col-md-4">
-                    <div class="d-flex flex-column align-items-center">
-                        <div class="text-center">
-                            <p>Base</p>
-                        </div>
-                        <div class="text-center m-2" id="triads"></div>
-                        <div class="text-center m-2" id="sevenths"></div>
-                        <div class="text-center m-2" id="extensions"></div>
+            <div class="row" id="display">
+                <div class="col">
+                    <div class="d-flex flex-wrap text-center justify-content-center" id="buttons"></div>
+                </div>
+            </div>
+            <div class="row" id="display-alterations">
+                <div class="col">
+                    <div class="row">
+                        <div class="btn btn-outline-light dropdown-toggle m-auto" id="alterations-btn">Alterations</div>
+                    </div>
+                    <div class="row">
+                        <div class="m-auto" id="alterations"></div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="text-center">
-                        <p>Alterations</p>
-                    </div>
-                    <div class="text-center" id="alterationFlex"></div>
-                </div>
-                <div class="col-md-4">
-                    <div class="text-center">
-                        <p>Scales</p>
-                    </div>
-                    <div class="d-inline-flex flex-wrap align-items-center text-center m-2" id="scaleFlex"></div>
+            </div>
+            <div class="row">
+                <div class="col text-center">
+                    <div class="btn btn-lg btn-outline-light rounded-circle m-4" id="finished">></div>
                 </div>
             </div>
         </div>

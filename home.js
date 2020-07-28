@@ -53,6 +53,8 @@ const scales = [
     // Hexatonic
     {name: "Whole Tone", intervals: [0, 2, 4, 6, 8, 10]},
     {name: "Augmented", intervals: [0, 3, 4, 7, 8, 11]}
+
+    // Blues scale is an outlier. Handled separately in updateScales()
 ]
 
 // Updates app.userChord with chord components
@@ -92,7 +94,7 @@ function userChordHandler(chordComponent) {
         }
         case "7":
         case "m7":
-        case "half diminshed":
+        case "half diminished":
         case "augmented 7":
         case "7sus2":
         case "7sus4": {
@@ -191,9 +193,9 @@ function userChordHandler(chordComponent) {
 
 // Create triad buttons
 function createTriads() {
-    const triadDiv = document.getElementById("triads");
+    const triadDiv = document.getElementById("buttons");
     for (let triad of app.triads) {
-        triadDiv.innerHTML += `<div class="btn btn-secondary m-2 triad-btn">${triad}</div>`;
+        triadDiv.innerHTML += `<div class="btn btn-outline-light flex-grow-1 m-2 triad-btn">${triad}</div>`;
     }
 }
 
@@ -202,7 +204,7 @@ function createTriads() {
 function createSevenths(triad) {
 
     // Grab div and clear it
-    const seventhsDiv = document.getElementById("sevenths");
+    const seventhsDiv = document.getElementById("buttons");
     seventhsDiv.innerHTML = null;
 
     let results = [];
@@ -239,14 +241,14 @@ function createSevenths(triad) {
 
     // Load div
     for (let result of results) {
-        seventhsDiv.innerHTML += `<div class="btn btn-secondary m-2 seventh-btn">${result}</div>`;
+        seventhsDiv.innerHTML += `<div class="btn btn-outline-light flex-grow-1 m-2 seventh-btn">${result}</div>`;
     }
 }
 
 // Create possible extension buttons using passed seventh
 function createExtensions(seventh) {
     // Grab div and clear it
-    const extensionsDiv = document.getElementById("extensions");
+    const extensionsDiv = document.getElementById("buttons");
     extensionsDiv.innerHTML = null;
 
     let results = [];
@@ -299,15 +301,15 @@ function createExtensions(seventh) {
 
     // Load div
     for (let result of results) {
-        extensionsDiv.innerHTML += `<div class="btn btn-secondary m-2 extension-btn">${result}</div>`;
+        extensionsDiv.innerHTML += `<div class="btn btn-outline-light flex-grow-1 m-2 extension-btn">${result}</div>`;
     }
 }
 
 function createAlterations() {
-    const alterationDiv = document.getElementById("alterationFlex");
+    const alterationDiv = document.getElementById("alterations");
 
     for (let alteration of app.alterations) {
-        alterationDiv.innerHTML += `<div class="btn btn-secondary m-2 alteration-btn">${alteration}</div`;
+        alterationDiv.innerHTML += `<div class="btn btn-outline-light m-2 alteration-btn">${alteration}</div>`;
     }
 }
 
@@ -316,10 +318,10 @@ function matches(scale) {
     return app.userChord.every(i => scale.intervals.includes(i))
 }
 
-// Update scales
+// Updates the scales div
 function updateScales(userChord) {
     // Grab scales div and clear it
-    let scalesDiv = document.getElementById("scaleFlex");
+    let scalesDiv = document.getElementById("buttons");
     scalesDiv.innerHTML = null;
 
     // Create array
@@ -339,51 +341,88 @@ function updateScales(userChord) {
 
     // Update the scale div with results.
     for (let scale of userScales) {
-        scalesDiv.innerHTML += `<div class="flex-grow-1 btn-secondary rounded p-2 m-2 scales-btn">${scale}</div>`
+        scalesDiv.innerHTML += `<div class="btn btn-outline-light flex-grow-1 m-2 scales-btn">${scale}</div>`
     }
 }
 
 // JQuery
-$(document).ready(function(){
 
+function animateDirections(directions) {
+    $("#directions").animate({opacity: "0"}, function() {
+        $(this).text(directions);
+        $(this).animate({opacity: "1"});
+    });
+}
+
+$(document).ready(() => {
+
+    // Display the directions and animate upon load
+    $("#directions").click(() => {
+        $("#banner").animate({height: "25%", fontSize: "4vw"}, "slow");
+        $("#display").fadeIn("slow");
+    });
+
+    // Create triad buttons
     createTriads();
+    
+    // When button is clicked, display value, update userChord, and clear div
+    $(".triad-btn").click(function() {
+        userChordHandler($(this).text())
+        $("#chord").text($(this).text());
+        $(this).parent().text(null);
 
-    $(".triad-btn").click(function(){
-        $("#select-chord").text($(this).text());
-        $(this).parent().slideUp("slow");
+        // Animate the directions
+        animateDirections("Now, select a seventh");
 
-        userChordHandler($(this).text());
+        // Create sevenths buttons
+        createSevenths($("#chord").text());
+
+        // When button is clicked, display value, update userChord, and clear div
+        $(".seventh-btn").click(function() {
+            userChordHandler($(this).text())
+            $("#chord").text($(this).text());
+            $(this).parent().text(null);
+
+            // Animate the directions
+            animateDirections("Are you extending this chord?");
+
+            // Create extension buttons
+            createExtensions($("#chord").text());
+            $("#display-alterations").fadeIn("slow");
+
+            // When button is clicked, display value, update userChord, and clear div
+            $(".extension-btn").click(function() {
+                userChordHandler($(this).text())
+                $("#chord").text($(this).text());
+                $(this).parent().text(null);
+            });
+
+        });
+
+    });
+
+    // When the alterations toggle is flipped, display alterations, duh
+    $("#alterations-btn").click(() => {
+        $("#alterations").fadeToggle("slow");
+    });
+
+    // Create the alterations
+    createAlterations();
+
+    // When an alteration is clicked, update the display and userChord
+    $(".alteration-btn").click(function() {
+        userChordHandler($(this).text())
+        $("#chord").text($("#chord").text() + " " + $(this).text());
+        $(this).hide();
+    });
+
+    // Create the scales, hide unnecessary stuff
+    $("#finished").click(function() {
+        $("#buttons").text(null);
+        $("#display-alterations").hide();
         updateScales(app.userChord);
-        
-        createSevenths($(this).text());
-        $("#sevenths").slideDown("slow");
+        $(this).hide();
+        animateDirections("Modes for chord");
+    });
 
-        $(".seventh-btn").click(function(){
-            $("#select-chord").text($(this).text());
-            $(this).parent().slideUp("slow");
-
-            userChordHandler($(this).text());
-            updateScales(app.userChord);
-
-            createAlterations();
-            $(".alteration-btn").click(function(){
-                $("#select-chord").text($("#select-chord").text() + $(this).text());
-                $(this).hide();
-
-                userChordHandler($(this).text());
-                updateScales(app.userChord);
-            })
-
-            createExtensions($(this).text());
-            $("#extensions").slideDown("slow");
-
-            $(".extension-btn").click(function(){
-                $("#select-chord").text($(this).text())
-
-                userChordHandler($(this).text());
-                updateScales(app.userChord);
-
-            })
-        })
-    })
 });

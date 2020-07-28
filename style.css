@@ -1,21 +1,23 @@
 html, body {
-    background-image: radial-gradient(#333 25%, #111);
+    background-image: radial-gradient(#523 5%, #111);
     color: white;
     height: 100%;
 }
 
-#triads {
-    /* display: none; */
+#banner {
+    height: 100%;
+    font-size: 5vw;
+    font-weight: 100;
 }
 
-#sevenths {
+#display {
     display: none;
 }
 
-#extensions {
+#display-alterations {
     display: none;
 }
 
-#scales {
+#alterations {
     display: none;
 }
