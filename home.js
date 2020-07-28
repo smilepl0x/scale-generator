@@ -27,7 +27,7 @@ const scales = [
     {name: "Dorian b2", intervals: [0, 1, 3, 5, 7, 9, 10]},
     {name: "Lydian Augmented", intervals: [0, 2, 4, 6, 8, 9, 11]},
     {name: "Lydian Dominant", intervals: [0, 2, 4, 6, 7, 9, 10]},
-    {name: "Mixolydian b6", intervals: [0, 2, 4, 6, 7, 9, 10]},
+    {name: "Mixolydian b6", intervals: [0, 2, 4, 5, 7, 8, 10]},
     {name: "Locrian ♮2", intervals: [0, 2, 3, 5, 6, 8, 10]},
     {name: "Altered", intervals: [0, 1, 3, 4, 6, 8, 10]},
 
