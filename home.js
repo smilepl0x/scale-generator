@@ -350,17 +350,16 @@ function updateScales(userChord) {
 function animateDirections(directions) {
     $("#directions").animate({opacity: "0"}, function() {
         $(this).text(directions);
-        $(this).animate({opacity: "1"});
+        $(this).animate({opacity: "1"}, 100).animate({opacity: "0"}, 100).animate({opacity: "1"}, 100);
     });
 }
 
 $(document).ready(() => {
 
     // Display the directions and animate upon load
-    $("#directions").click(() => {
-        $("#banner").animate({height: "50%", fontSize: "4vw"}, "slow");
-        $("#display").fadeIn("slow");
-    });
+    animateDirections("Please select a Triad");
+    $("#banner").animate({height: "25%", fontSize: "4vw"})
+    $("#display").fadeIn("slow");
 
     // Create triad buttons
     createTriads();
@@ -385,11 +384,11 @@ $(document).ready(() => {
             $(this).parent().text(null);
 
             // Animate the directions
-            animateDirections("Are you extending this chord?");
+            animateDirections("Any extensions or alterations?");
 
             // Create extension buttons
             createExtensions($("#chord").text());
-            $("#display-alterations").fadeIn("slow");
+            $("#display-alterations").fadeIn(2000);
 
             // When button is clicked, display value, update userChord, and clear div
             $(".extension-btn").click(function() {
