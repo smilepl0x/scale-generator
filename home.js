@@ -365,12 +365,13 @@ $(document).ready(() => {
     // Create triad buttons
     createTriads();
     
-    // When button is clicked, display value, update userChord, and clear div
+    // When button is clicked, display value, display finish button, update userChord, and clear div
     $(".triad-btn").click(function() {
         userChordHandler($(this).text())
         $("#chord").text($(this).text());
         $(this).parent().text(null);
-
+        $("#finished").removeClass("invisible");
+    
         // Animate the directions
         animateDirections("Now, select a seventh");
 
