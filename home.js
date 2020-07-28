@@ -358,7 +358,7 @@ $(document).ready(() => {
 
     // Display the directions and animate upon load
     animateDirections("Please select a Triad");
-    $("#banner").animate({height: "25%", fontSize: "4vw"})
+    $("#banner").animate({height: "25%", fontSize: "2em"})
     $("#display").fadeIn("slow");
 
     // Create triad buttons
