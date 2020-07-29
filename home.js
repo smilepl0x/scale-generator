@@ -11,40 +11,40 @@ const app = {
 
 const scales = [
     // Major
-    {name: "Ionian", intervals: [0, 2, 4, 5, 7, 9, 11]},
-    {name: "Dorian", intervals: [0, 2, 3, 5, 7, 9, 10]},
-    {name: "Phrygian", intervals: [0, 1, 3, 5, 7, 8, 10]},
-    {name: "Lydian", intervals: [0, 2, 4, 6, 7, 9, 11]},
-    {name: "Mixolydian", intervals: [0, 2, 4, 5, 7, 9, 10]},
-    {name: "Aeolian", intervals: [0, 2, 3, 5, 7, 8, 10]},
-    {name: "Locrian", intervals: [0, 1, 3, 5, 6, 8, 10]},
+    {name: "Ionian", description: "First mode of the Major Scale", intervals: [0, 2, 4, 5, 7, 9, 11]},
+    {name: "Dorian", description: "Second mode of the Major Scale", intervals: [0, 2, 3, 5, 7, 9, 10]},
+    {name: "Phrygian", description: "Third mode of the Major Scale", intervals: [0, 1, 3, 5, 7, 8, 10]},
+    {name: "Lydian", description: "Fourth mode of the Major Scale", intervals: [0, 2, 4, 6, 7, 9, 11]},
+    {name: "Mixolydian", description: "Fifth mode of the Major Scale", intervals: [0, 2, 4, 5, 7, 9, 10]},
+    {name: "Aeolian", description: "Sixth mode of the Major Scale", intervals: [0, 2, 3, 5, 7, 8, 10]},
+    {name: "Locrian", description: "Seventh mode of the Major Scale", intervals: [0, 1, 3, 5, 6, 8, 10]},
 
     // Harmonic Minor
-    {name: "Harmonic Minor", intervals: [0, 2, 3, 5, 7, 8, 11]},
-    {name: "Locrian #6", intervals: [0, 1, 3, 5, 6, 9, 10]},
-    {name: "Ionian #5", intervals: [0, 2, 4, 5, 8, 9, 11]},
-    {name: "Dorian #4", intervals: [0, 2, 3, 6, 7, 9, 10]},
-    {name: "Phrygian #3", intervals: [0, 1, 4, 5, 7, 8, 10]},
-    {name: "Lydian #2", intervals: [0, 3, 4, 6, 7, 9, 11]},
-    {name: "Ultralocrian", intervals: [0, 1, 3, 4, 6, 8, 9]},
+    {name: "Harmonic Minor", description: "First mode of the Harmonic Minor Scale", intervals: [0, 2, 3, 5, 7, 8, 11]},
+    {name: "Locrian #6", description: "Second mode of the Harmonic Minor Scale", intervals: [0, 1, 3, 5, 6, 9, 10]},
+    {name: "Ionian #5", description: "Third mode of the Harmonic Minor Scale", intervals: [0, 2, 4, 5, 8, 9, 11]},
+    {name: "Dorian #4", description: "Fourth mode of the Harmonic Minor Scale", intervals: [0, 2, 3, 6, 7, 9, 10]},
+    {name: "Phrygian #3", description: "Fifth mode of the Harmonic Minor Scale", intervals: [0, 1, 4, 5, 7, 8, 10]},
+    {name: "Lydian #2", description: "Sixth mode of the Harmonic Minor Scale", intervals: [0, 3, 4, 6, 7, 9, 11]},
+    {name: "Ultralocrian", description: "Seventh mode of the Harmonic Minor Scale", intervals: [0, 1, 3, 4, 6, 8, 9]},
 
     // Melodic Minor
-    {name: "Melodic Minor", intervals: [0, 2, 3, 5, 7, 9, 11]},
-    {name: "Dorian b2", intervals: [0, 1, 3, 5, 7, 9, 10]},
-    {name: "Lydian Augmented", intervals: [0, 2, 4, 6, 8, 9, 11]},
-    {name: "Lydian Dominant", intervals: [0, 2, 4, 6, 7, 9, 10]},
-    {name: "Mixolydian b6", intervals: [0, 2, 4, 5, 7, 8, 10]},
-    {name: "Locrian ♮2", intervals: [0, 2, 3, 5, 6, 8, 10]},
-    {name: "Altered", intervals: [0, 1, 3, 4, 6, 8, 10]},
+    {name: "Melodic Minor", description: "First mode of the Melodic Minor Scale", intervals: [0, 2, 3, 5, 7, 9, 11]},
+    {name: "Dorian b2", description: "Second mode of the Melodic Minor Scale", intervals: [0, 1, 3, 5, 7, 9, 10]},
+    {name: "Lydian Augmented", description: "Third mode of the Melodic Minor Scale", intervals: [0, 2, 4, 6, 8, 9, 11]},
+    {name: "Lydian Dominant", description: "Fourth mode of the Melodic Minor Scale", intervals: [0, 2, 4, 6, 7, 9, 10]},
+    {name: "Mixolydian b6", description: "Fifth mode of the Melodic Minor Scale", intervals: [0, 2, 4, 5, 7, 8, 10]},
+    {name: "Locrian ♮2", description: "Sixth mode of the Melodic Minor Scale", intervals: [0, 2, 3, 5, 6, 8, 10]},
+    {name: "Altered", description: "Seventh mode of the Melodic Minor Scale", intervals: [0, 1, 3, 4, 6, 8, 10]},
 
     // Harmonic Major
-    {name: "Harmonic Major", intervals: [0, 2, 4, 5, 7, 8, 11]},
-    {name: "Dorian b5", intervals: [0, 2, 3, 5, 6, 9, 10]},
-    {name: "Phrygian b4", intervals: [0, 1, 3, 4, 7, 8, 10]},
-    {name: "Lydian Minor", intervals: [0, 2, 3, 6, 7, 9, 11]},
-    {name: "Mixolydian b9", intervals: [0, 1, 4, 5, 7, 9, 10]},
-    {name: "Lydian Augmented #2", intervals: [0, 3, 4, 6, 8, 9, 11]},
-    {name: "Locrian bb7", intervals: [0, 1, 3, 5, 6, 8, 9]},
+    {name: "Harmonic Major", description: "First mode of the Harmonic Major Scale", intervals: [0, 2, 4, 5, 7, 8, 11]},
+    {name: "Dorian b5", description: "Second mode of the Harmonic Major Scale", intervals: [0, 2, 3, 5, 6, 9, 10]},
+    {name: "Phrygian b4", description: "Third mode of the Harmonic Major Scale", intervals: [0, 1, 3, 4, 7, 8, 10]},
+    {name: "Lydian Minor", description: "Fourth mode of the Harmonic Major Scale", intervals: [0, 2, 3, 6, 7, 9, 11]},
+    {name: "Mixolydian b9", description: "Fifth mode of the Harmonic Major Scale", intervals: [0, 1, 4, 5, 7, 9, 10]},
+    {name: "Lydian Augmented #2", description: "Sixth mode of the Harmonic Major Scale", intervals: [0, 3, 4, 6, 8, 9, 11]},
+    {name: "Locrian bb7", description: "Seventh mode of the Harmonic Major Scale", intervals: [0, 1, 3, 5, 6, 8, 9]},
 
     // Diminished
     {name: "WH (fully diminished)", intervals: [0, 2, 3, 5, 6, 8, 9, 11]},
@@ -324,25 +324,19 @@ function updateScales(userChord) {
     let scalesDiv = document.getElementById("buttons");
     scalesDiv.innerHTML = null;
 
-    // Create array
-    let userScales = [];
-
     // Pass each scale into the matches() function to see if it matches app.userChord.
     let scalesResult = scales.filter(scale => matches(scale));
 
     // Append each matching scale to userScales
-    scalesResult.forEach(scale => userScales.push(scale.name));
+    scalesResult.forEach(scale => scalesDiv.innerHTML += `<div class="btn btn-outline-light flex-grow-1 m-2 scales-btn">${scale.name}<div id="mode-description">${scale.description}</div></div>`);
 
     // Outlier rule for stupid blues scales
+    //TODO fix blues scale
     const bluesScale = [0, 4, 7, 10, 3];
     if (userChord.every((val, index) => val === bluesScale[index]) && app.userChord.length === bluesScale.length) {
-        userScales.push("Blues Scale");
+        scalesDiv.innerHTML += `<div class="btn btn-outline-light flex-grow-1 m-2 scales-btn">Blues Scale<div id="mode-description"></div></div>`;
     }
 
-    // Update the scale div with results.
-    for (let scale of userScales) {
-        scalesDiv.innerHTML += `<div class="btn btn-outline-light flex-grow-1 m-2 scales-btn">${scale}</div>`
-    }
 }
 
 // JQuery
@@ -426,6 +420,12 @@ $(document).ready(() => {
         $("#finished").click(function() {
             location.reload()
         });
+
+        $(".scales-btn").click(function() {
+            $(this).children().fadeToggle("slow");
+        });
+
     });
+
 
 });
